@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- dynamic page title goes here -->
+    <title><%= pageTitle %></title>
+  </head>
+  <body>
+    <!-- a lit of book at the center of the screen -->
+
+    <h1>a lists of books</h1>
+    <ul>
+      <% availableBooks.forEach(function(book){ %>
+      <li><%= book.name %>, £<%= book.price %></li>
+      <% }) %>
+    </ul>
+  </body>
+</html>

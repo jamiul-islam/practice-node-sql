@@ -31,7 +31,10 @@ export default function mainRoutes(app, baseDir) {
   app.get("/list", async (req, res) => {
     try {
       const result = await getBooks();
-      res.send(result);
+      res.render("list.html", {
+        pageTitle: "List of Books",
+        availableBooks: result,
+      });
     } catch (error) {
       res.status(500).send("Error retrieving books");
     }
