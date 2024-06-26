@@ -35,8 +35,19 @@ async function getBookById(id) {
   return results;
 }
 
+// create a book
+async function createBook(name, price) {
+  const [results] = await pool
+    .query("INSERT INTO Books (name, price) VALUES (?, ?)", [name, price])
+    .catch((err) => {
+      console.log("🚨 ERROR: " + err?.sqlMessage);
+      console.log("🚨 for sql command: " + err?.sql);
+    });
+  return results;
+}
+
 // testing the functions
-const books = await getBookById(2);
+// const books = await createBook("Book 1", 20.5);
 // console.log(books);
 
-export { getBooks, getBookById };
+export { getBooks, getBookById, createBook };

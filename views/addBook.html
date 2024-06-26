@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 style="color: red; text-align: center">Add A Book</h1>
+    <!-- register form -->
+    <form method="POST" action="/bookAdded">
+      <input id="name" type="text" name="name" value="name" />
+      <input id="price" type="text" name="price" value="price" />
+      <input type="submit" value="OK" />
+    </form>
+
+    <!-- list to /list route -->
+    <a href="/list">show all books</a>
+  </body>
+</html>

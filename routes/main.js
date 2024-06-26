@@ -1,5 +1,5 @@
 import path from "path";
-import { getBooks } from "../database.js"; // Adjust the path according to your project structure
+import { createBook, getBooks } from "../database.js"; // Adjust the path according to your project structure
 
 /**
  * Defines the routes for the main application
@@ -26,6 +26,20 @@ export default function mainRoutes(app, baseDir) {
 
   app.post("/registered", function (req, res) {
     res.send(req.body);
+  });
+
+  app.get("/addBook", (req, res) => {
+    res.sendFile(path.join(baseDir, "views", "addBook.html"));
+  });
+
+  app.post("/bookAdded", async function (req, res) {
+    await createBook(req.body.name, req.body.price);
+    res.send(
+      " This book is added to database, name: " +
+        req.body.name +
+        " price " +
+        req.body.price
+    );
   });
 
   app.get("/list", async (req, res) => {
