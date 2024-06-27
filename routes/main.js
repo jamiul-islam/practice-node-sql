@@ -1,5 +1,5 @@
 import path from "path";
-import { createBook, getBooks } from "../database.js"; // Adjust the path according to your project structure
+import { createBook, getBooks, getABook } from "../database.js"; // Adjust the path according to your project structure
 
 /**
  * Defines the routes for the main application
@@ -15,9 +15,16 @@ export default function mainRoutes(app, baseDir) {
     res.sendFile(path.join(baseDir, "views", "search.html"));
   });
 
-  app.get("/search-result", function (req, res) {
-    console.log(req.query);
-    res.send("You entered: " + req.query.keyword);
+  app.get("/search-result-db", async (req, res) => {
+    try {
+      const result = await getABook(req.query.keyword);
+      res.render("list.html", {
+        pageTitle: "List of Books",
+        availableBooks: result,
+      });
+    } catch (error) {
+      res.status(500).send("Error retrieving books");
+    }
   });
 
   app.get("/register", function (req, res) {

@@ -24,6 +24,18 @@ async function getBooks() {
   return results;
 }
 
+// get book by name
+async function getABook(bookName) {
+  const [results] = await pool
+    .query("SELECT * FROM Books WHERE name like ?", [bookName])
+    .catch((err) => {
+      console.log("🚨 ERROR: " + err?.sqlMessage);
+      console.log("🚨 for sql command: " + err?.sql);
+    });
+
+  return results;
+}
+
 // get single book by id
 async function getBookById(id) {
   const [results] = await pool
@@ -32,6 +44,7 @@ async function getBookById(id) {
       console.log("🚨 ERROR: " + err?.sqlMessage);
       console.log("🚨 for sql command: " + err?.sql);
     });
+
   return results;
 }
 
@@ -46,8 +59,4 @@ async function createBook(name, price) {
   return results;
 }
 
-// testing the functions
-// const books = await createBook("Book 1", 20.5);
-// console.log(books);
-
-export { getBooks, getBookById, createBook };
+export { getBooks, getABook, getBookById, createBook };
